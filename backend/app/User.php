@@ -41,4 +41,12 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Folder');
     }
+
+    /**
+     * パスワード再設定メールを送信する
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        Mail::to($this)->send(new ResetPassword($token));
+    }
 }
